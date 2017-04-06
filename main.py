@@ -103,8 +103,9 @@ def get_most_popular_artists(listenings, artists):
 def get_month_distribution(listenings, dates):
     cnt = Counter()
     for l in listenings:
-        cnt[dates[l.date_id].month] += 1
-    return [(c[0], c[1]) for c in cnt]
+        my_date = dates[l.date_id]
+        cnt[my_date.month] += 1
+    return sorted(cnt.items())
 
 
 if __name__ == "__main__":
@@ -144,7 +145,7 @@ if __name__ == "__main__":
                     songs[song_idk].add_performance(performance_idk)
 
     with open(triplets, encoding="latin-1") as infile:
-        for line in islice(infile, 1000000):
+        for line in islice(infile, 1000):
             user_id, song_id, date = line.strip().split("<SEP>")
             date_parsed = Date(int(date))
             time_parsed = Time(int(date))
@@ -182,7 +183,7 @@ if __name__ == "__main__":
     print()
 
     start = timer()
-    months_counted = get_month_distribution(listenings, artists_id_to_artist)
+    months_counted = get_month_distribution(listenings, dates)
     end = timer()
     print(*months_counted, sep="\n")
     print(end - start)
