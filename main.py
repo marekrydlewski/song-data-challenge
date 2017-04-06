@@ -20,6 +20,9 @@ class Listening:
         self.date_id = date_id
         self.time_id = time_id
 
+    def __str__(self):
+        return "{0}, {1}, {2}, {3}, {4}\n".format(self.song_id, self.user_id, self.artist_id, self.date_id, self.time_id)
+
 
 class User:
     def __init__(self, idk):
@@ -77,7 +80,7 @@ def process_tracks(file_name):
 
 def get_number_of_lines(file_name):
     with open(file_name, encoding="latin-1") as infile:
-        lines =  sum(1 for line in infile)
+        lines = sum(1 for _ in infile)
     return lines
 
 if __name__ == "__main__":
@@ -85,7 +88,7 @@ if __name__ == "__main__":
     triplets = "data\\triplets_sample_20p.txt"
 
     artists = {}
-    artists_set = set()
+    artists_of_songs = {}
     songs = {}
     users = {}
     dates = {}
@@ -102,27 +105,27 @@ if __name__ == "__main__":
     with open(tracks, encoding="latin-1") as infile:
         for line in (infile):
             performance_idk, song_idk, artist, title = line.strip().split("<SEP>")
-
-            if not artist in artists:
+            if artist not in artists:
                 artists[artist] = Artist(artist)
-                artists_set.add(Artist.max_id)
-            if not song_idk in songs:
+
+            artists_of_songs[song_idk] = artists[artist].idk
+            if song_idk not in songs:
                 songs[song_idk] = Song(title, song_idk, performance_idk)
             else:
                 if songs[song_idk].is_performance(performance_idk):
                     songs[song_idk].add_performance(performance_idk)
 
     with open(triplets, encoding="latin-1") as infile:
-        for line in islice(infile, 10000):
+        for line in islice(infile, 1000000):
             user_id, song_id, date = line.strip().split("<SEP>")
             date_parsed = Date(int(date))
             time_parsed = Time(int(date))
 
-            if not date_parsed in dates:
+            if date_parsed not in dates:
                 dates[date_parsed.idk] = date_parsed
-            if not time_parsed in times:
+            if time_parsed not in times:
                 times[time_parsed.idk] = time_parsed
-            if not user_id in users:
+            if user_id not in users:
                 users[user_id] = User(user_id)
 
             listening = Listening()
@@ -130,6 +133,7 @@ if __name__ == "__main__":
             listening.user_id = user_id
             listening.date_id = date_parsed.idk
             listening.time_id = time_parsed.idk
+            listening.artist_id = artists_of_songs[song_id]
             listenings.append(listening)
 
     end = timer()
