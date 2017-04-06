@@ -1,0 +1,79 @@
+['TRMMMYQ128F932D901', 'SOQMMHC12AB0180CB8', 'Faster Pussy cat', 'Silent Night']                          
+['TRMMMKD128F425225D', 'SOVFVAK12A8C1350D9', 'Karkkiautomaatti', 'Tanssi vaan']                           
+['TRMMMRX128F93187D9', 'SOGTUKN12AB017F4F1', 'Hudson Mohawke', 'No One Could Ever']                       
+['b80344d063b5ccb3212f76538f3d9e43d87dca9e', 'SOBBMDR12A8C13253B', '1203083335']                          
+['b80344d063b5ccb3212f76538f3d9e43d87dca9e', 'SOBXALG12A8C13C108', '984663773']                           
+['b80344d063b5ccb3212f76538f3d9e43d87dca9e', 'SODDNQT12A6D4F5F7E', '1275071044']                          
+                                                                                                          
+236.02996257421086                                                                                        
+sizes:                                                                                                    
+235332040                                                                                                 
+2621544                                                                                                   
+2621544                                                                                                   
+41943144                                                                                                  
+41943144                                                                                                  
+147560                                                                                                    
+18528                                                                                                     
+                                                                                                          
+tasks:                                                                                                    
+("You're The One", 145267)                                                                                
+('Undo', 129778)                                                                                          
+('Revelry', 105162)                                                                                       
+('Sehr kosmisch', 84981)                                                                                  
+('Horn Concerto No. 4 in E flat K495: II. Romance (Andante cantabile)', 77632)                            
+('Dog Days Are Over (Radio Edit)', 71300)                                                                 
+('Secrets', 58472)                                                                                        
+('Canada', 54655)                                                                                         
+('Invalid', 53494)                                                                                        
+("Ain't Misbehavin", 49073)                                                                               
+14.178063900029372                                                                                        
+                                                                                                          
+('Coldplay', 201081)                                                                                      
+('Kings Of Leon', 182709)                                                                                 
+('Florence + The Machine', 156776)                                                                        
+('Dwight Yoakam', 146580)                                                                                 
+('Björk', 143865)                                                                                         
+('The Black Keys', 139775)                                                                                
+('Jack Johnson', 115877)                                                                                  
+('Justin Bieber', 114233)                                                                                 
+('Train', 107169)                                                                                         
+('Alliance Ethnik', 106401)                                                                               
+12.276114962006602                                                                                        
+                                                                                                          
+(1, 2353286)                                                                                              
+(2, 2142739)                                                                                              
+(3, 2351583)                                                                                              
+(4, 2280859)                                                                                              
+(5, 2357973)                                                                                              
+(6, 2277722)                                                                                              
+(7, 2353267)                                                                                              
+(8, 2354972)                                                                                              
+(9, 2281348)                                                                                              
+(10, 2358168)                                                                                             
+(11, 2278335)                                                                                             
+(12, 2339105)                                                                                             
+15.716515738609303                                                                                        
+                                                                                                          
+('ec6dfcf19485cb011e0b22637075037aae34cf26', 1039)                                                        
+('119b7c88d58d0c6eb051365c103da5caf817bea6', 641)                                                         
+('b7c24f770be6b802805ac0e2106624a517643c17', 636)                                                         
+('4e73d9e058d2b1f2dba9c1fe4a8f416f9f58364f', 592)                                                         
+('d7d2d888ae04d16e994d6964214a1de81392ee04', 585)                                                         
+('6d625c6557df84b60d90426c0116138b617b9449', 584)                                                         
+('113255a012b2affeab62607563d03fbdf31b08e7', 560)                                                         
+('c1255748c06ee3f6440c51c439446886c7807095', 546)                                                         
+('db6a78c78c9239aba33861dae7611a6893fb27d5', 528)                                                         
+('99ac3d883681e21ea68071019dba828ce76fe94d', 498)                                                         
+12.64261121533167                                                                                         
+                                                                                                          
+a494be004ee513028b20d3e5478ff183f50e8610                                                                  
+4cd2428f7bfcff1e2423bbdfc1437a1572c23700                                                                  
+5a60f46e0d86990db2e5f953b7b9f0d070d25b1c                                                                  
+11abd6aaa54a50ed5575e8af9a485db752b97b42                                                                  
+8b73a74377e6b532ac7adf755d6499a560ee98e5                                                                  
+6f1b401196e9b0bd8364b47a38665ff92b148bea                                                                  
+8ce3df5eb4af3232740de3607f2e944a84cd2662                                                                  
+28daf225834bae38f86555c8a03bca3bbf0e535d                                                                  
+b7f16f96ffdfe73ee6bd971ee23cd68b52f4d8dc                                                                  
+b20bc18bcdfd2cd7eb128fb28b92d33e90493d81                                                                  
+5.0587030758662195                                                                                        

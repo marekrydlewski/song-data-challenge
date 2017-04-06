@@ -2,11 +2,13 @@ from itertools import islice
 from collections import Counter
 from datetime import datetime
 from pprint import pprint
+import sys
 from timeit import default_timer as timer
 
 
 class Artist:
     max_id = 0
+
     def __init__(self, name):
         Artist.max_id += 1
         self.name = name
@@ -14,7 +16,7 @@ class Artist:
 
 
 class Listening:
-    def __init__(self, song_id=None , user_id=None, artist_id=None, date_id=None, time_id=None):
+    def __init__(self, song_id=None, user_id=None, artist_id=None, date_id=None, time_id=None):
         self.song_id = song_id
         self.user_id = user_id
         self.artist_id = artist_id
@@ -22,7 +24,8 @@ class Listening:
         self.time_id = time_id
 
     def __str__(self):
-        return "{0}, {1}, {2}, {3}, {4}\n".format(self.song_id, self.user_id, self.artist_id, self.date_id, self.time_id)
+        return "{0}, {1}, {2}, {3}, {4}\n".format(self.song_id, self.user_id, self.artist_id, self.date_id,
+                                                  self.time_id)
 
 
 class User:
@@ -108,6 +111,36 @@ def get_month_distribution(listenings, dates):
     return sorted(cnt.items())
 
 
+def get_user_ranking(listenings):
+    user_songs = {}
+    for l in listenings:
+        if l.user_id in user_songs:
+            user_songs[l.user_id].add(l.song_id)
+        else:
+            user_songs[l.user_id] = set()
+    cnt = Counter()
+    for k, val in user_songs.items():
+        cnt[k] = len(val)
+    return cnt.most_common(10)
+
+
+def get_queen_users(listenings, artists):
+    queen_id = artists["Queen"].idk
+    queen_users = {}
+    cnt = Counter()
+    for l in listenings:
+        if l.artist_id == queen_id:
+            cnt[l.song_id] += 1
+            if l.song_id in queen_users:
+                queen_users[l.song_id].add(l.user_id)
+            else:
+                queen_users[l.song_id] = set()
+
+    most_popular = [c[0] for c in cnt.most_common(3)]
+    users_sets = [queen_users[mp] for mp in most_popular]
+    return list(users_sets[0].intersection(users_sets[1]).intersection(users_sets[2]))[:10]
+
+
 if __name__ == "__main__":
     tracks = "data\\unique_tracks.txt"
     triplets = "data\\triplets_sample_20p.txt"
@@ -124,6 +157,7 @@ if __name__ == "__main__":
     show_file(tracks)
     show_file(triplets)
     print()
+
     # print(get_number_of_lines(tracks))
     # print(get_number_of_lines(triplets))
 
@@ -145,7 +179,7 @@ if __name__ == "__main__":
                     songs[song_idk].add_performance(performance_idk)
 
     with open(triplets, encoding="latin-1") as infile:
-        for line in islice(infile, 1000):
+        for line in infile:
             user_id, song_id, date = line.strip().split("<SEP>")
             date_parsed = Date(int(date))
             time_parsed = Time(int(date))
@@ -168,6 +202,18 @@ if __name__ == "__main__":
     end = timer()
     print(end - start)
 
+    print("sizes:")
+    print(sys.getsizeof(listenings))
+    print(sys.getsizeof(artists))
+    print(sys.getsizeof(artists_id_to_artist))
+    print(sys.getsizeof(songs))
+    print(sys.getsizeof(users))
+    print(sys.getsizeof(dates))
+    print(sys.getsizeof(times))
+
+    print()
+    print("tasks:")
+
     start = timer()
     most_popular_songs = get_most_popular_songs(listenings, songs)
     end = timer()
@@ -188,7 +234,17 @@ if __name__ == "__main__":
     print(*months_counted, sep="\n")
     print(end - start)
     print()
-    
-    #pprint(artists)
-    #pprint(songs)
 
+    start = timer()
+    user_ranking = get_user_ranking(listenings)
+    end = timer()
+    print(*user_ranking, sep="\n")
+    print(end - start)
+    print()
+
+    start = timer()
+    queens = get_queen_users(listenings, artists)
+    end = timer()
+    print(*queens, sep="\n")
+    print(end - start)
+    print()
