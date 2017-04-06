@@ -1,4 +1,5 @@
 from itertools import islice
+from collections import Counter
 from datetime import datetime
 from pprint import pprint
 from timeit import default_timer as timer
@@ -63,7 +64,8 @@ class Time:
         self.minute = date.minute
         self.idk = self.hour * 24 + self.minute
 
-def show_file(file_name, n=10):
+
+def show_file(file_name, n=3):
     with open(file_name) as infile:
         head = list(islice(infile, n))
     print(*[h.strip().split("<SEP>") for h in head], sep='\n')
@@ -83,11 +85,34 @@ def get_number_of_lines(file_name):
         lines = sum(1 for _ in infile)
     return lines
 
+
+def get_most_popular_songs(listenings, songs):
+    cnt = Counter()
+    for l in listenings:
+        cnt[l.song_id] += 1
+    return [(songs[c[0]].title, c[1]) for c in cnt.most_common(10)]
+
+
+def get_most_popular_artists(listenings, artists):
+    cnt = Counter()
+    for l in listenings:
+        cnt[l.artist_id] += 1
+    return [(artists[c[0]].name, c[1]) for c in cnt.most_common(10)]
+
+
+def get_month_distribution(listenings, dates):
+    cnt = Counter()
+    for l in listenings:
+        cnt[dates[l.date_id].month] += 1
+    return [(c[0], c[1]) for c in cnt]
+
+
 if __name__ == "__main__":
     tracks = "data\\unique_tracks.txt"
     triplets = "data\\triplets_sample_20p.txt"
 
     artists = {}
+    artists_id_to_artist = {}
     artists_of_songs = {}
     songs = {}
     users = {}
@@ -97,6 +122,7 @@ if __name__ == "__main__":
 
     show_file(tracks)
     show_file(triplets)
+    print()
     # print(get_number_of_lines(tracks))
     # print(get_number_of_lines(triplets))
 
@@ -106,7 +132,9 @@ if __name__ == "__main__":
         for line in (infile):
             performance_idk, song_idk, artist, title = line.strip().split("<SEP>")
             if artist not in artists:
-                artists[artist] = Artist(artist)
+                new_artist = Artist(artist)
+                artists[artist] = new_artist
+                artists_id_to_artist[new_artist.idk] = new_artist
 
             artists_of_songs[song_idk] = artists[artist].idk
             if song_idk not in songs:
@@ -138,6 +166,28 @@ if __name__ == "__main__":
 
     end = timer()
     print(end - start)
+
+    start = timer()
+    most_popular_songs = get_most_popular_songs(listenings, songs)
+    end = timer()
+    print(*most_popular_songs, sep="\n")
+    print(end - start)
+    print()
+
+    start = timer()
+    most_popular_artists = get_most_popular_artists(listenings, artists_id_to_artist)
+    end = timer()
+    print(*most_popular_artists, sep="\n")
+    print(end - start)
+    print()
+
+    start = timer()
+    months_counted = get_month_distribution(listenings, artists_id_to_artist)
+    end = timer()
+    print(*months_counted, sep="\n")
+    print(end - start)
+    print()
+    
     #pprint(artists)
     #pprint(songs)
 
