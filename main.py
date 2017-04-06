@@ -10,7 +10,12 @@ class Artist:
 
 
 class Listening:
-    pass
+    def __init__(self, idk_song, idk_user, idk_artist, idk_date, idk_time):
+        self.idk_song = idk_song
+        self.idk_user = idk_user
+        self.idk_artist = idk_artist
+        self.idk_date = idk_date
+        self.idk_time = idk_time
 
 
 class User:
@@ -32,6 +37,12 @@ class Date:
         self.year = date.year
         self.month = date.month
         self.day = date.day
+        # produce unique key:
+        idk = self.year * 100
+        idk += self.month
+        idk *= 100
+        idk += self.day
+        self.idk = idk
 
 
 class Time:
@@ -39,7 +50,7 @@ class Time:
         date = datetime.fromtimestamp(t_stamp)
         self.hour = date.hour
         self.minute = date.minute
-
+        self.idk = self.hour * 24 + self.minute
 
 def show_file(file_name, n=10):
     with open(file_name) as infile:
@@ -51,7 +62,7 @@ def process_file(file_name):
     with open(file_name) as infile:
         for line in islice(infile):
             line_sep = line.strip().split("<SEP>")
-            #datetime.fromtimestamp(number_date)
+            # datetime.fromtimestamp(number_date)
 
 
 if __name__ == "__main__":
